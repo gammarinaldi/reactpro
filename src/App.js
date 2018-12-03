@@ -1,28 +1,64 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import HeaderReact from './components/HeaderReact';
+import LoginReact from './components/LoginReact';
+import RegisterReact from './components/RegisterReact';
+import Table from './components/Table';
+import Home from './components/Home';
+import { Route, withRouter } from 'react-router-dom';
+import Produk from './components/Produk';
+import { connect } from 'react-redux';
+import Cookies from 'universal-cookie';
+import { keepLogin, cookieChecked } from './actions';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import ManageProduk from './components/ManageProduk';
+
+const cookies = new Cookies();
 
 class App extends Component {
+
+  componentDidMount() {
+    const newCookie = cookies.get('UserData');
+    if(newCookie) {
+        this.props.keepLogin(newCookie);
+    } else {
+      this.props.cookieChecked();
+    }
+  }
+
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+
+    if(this.props.cookie) {
+      return (
+        <div className={"container"}>
+        <h1>{this.props.contentHeader}</h1>
+
+        <HeaderReact NavBrand={'Learning Performance Indicator'} />
+
+        <div>
+          <Route exact path="/" component={Home}/>
+          <Route path="/table" component={Table}/>
+          <Route path="/produk" component={Produk}/>
+          <Route path="/login" component={LoginReact}/>
+          <Route path="/register" component={RegisterReact}/>
+          <Route path="/admin" component={''}/>
+          <Route path="/manageproduk" component={ManageProduk}/>
+        </div>
+
       </div>
-    );
+      )
+    }
+
+    return (
+      <div>
+        <br/><br/>
+        <center><FontAwesomeIcon icon={faSpinner} size="lg" /></center>
+      </div> 
+    )
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return { cookie: state.auth.cookie }
+}
+export default withRouter(connect(mapStateToProps, { keepLogin, cookieChecked })(App));
