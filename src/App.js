@@ -12,6 +12,7 @@ import { keepLogin, cookieChecked } from './actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import ManageProduk from './components/ManageProduk';
+import ProdukDetail from './components/ProdukDetail';
 
 const cookies = new Cookies();
 
@@ -43,6 +44,7 @@ class App extends Component {
           <Route path="/register" component={RegisterReact}/>
           <Route path="/admin" component={''}/>
           <Route path="/manageproduk" component={ManageProduk}/>
+          <Route path="/produkdetail" component={ProdukDetail}/>
         </div>
 
       </div>

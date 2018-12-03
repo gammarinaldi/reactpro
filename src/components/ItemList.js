@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { select_produk } from '../actions';
 
 class ItemList extends Component {
 
@@ -9,14 +11,18 @@ class ItemList extends Component {
         return 'Rp. '+rupiah.split('',rupiah.length-1).reverse().join('');
     }
 
+    onItemClick = () => {
+        this.props.select_produk(this.props.produk);
+    }
+
     render() {
 
+        //const { img, nama, merk, description, harga } = this.props.produk;
         const { img, brand, model, desc, harga } = this.props.produk;
-        
 
         return (
             //====================START >> ITEM PRODUK=========================//
-            <div className="col-md-4 col-sm-6 portfolio-item">
+            <div onClick={this.onItemClick} className="col-md-4 col-sm-6 portfolio-item">
             <a className="portfolio-link" data-toggle="modal" href="#portfolioModal1">
                 <div className="portfolio-hover">
                 <div className="portfolio-hover-content">
@@ -37,4 +43,4 @@ class ItemList extends Component {
     }
 }
 
-export default ItemList;
+export default connect(null, { select_produk })(ItemList);

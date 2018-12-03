@@ -6,7 +6,8 @@ import {
     AUTH_SYSTEM_ERROR,
     LOGOUT,
     USER_REGISTER_SUCCESS,
-    COOKIE_CHECKED
+    COOKIE_CHECKED,
+    SELECT_PRODUK
 } from './types';
 
 export const onUserRegister = ({ username, email, phone, password }) => {
@@ -89,6 +90,13 @@ export const onUserLogin = ({ username, password}) => {
 
     }
 
+}
+
+export const select_produk = (selectedProduk) => {
+    return {
+        type: SELECT_PRODUK,
+        payload: selectedProduk
+    }
 }
 
 export const keepLogin = (username) => {

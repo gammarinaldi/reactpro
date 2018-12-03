@@ -4,3 +4,4 @@ export const AUTH_LOADING = 'Auth loading';
 export const LOGOUT = 'Logout';
 export const USER_REGISTER_SUCCESS = 'Register success';
 export const COOKIE_CHECKED = 'Cookie checked.';
+export const SELECT_PRODUK = 'Select produk';

@@ -77,46 +77,6 @@
       "desc": "Yamaha XMAX",
       "harga": 36000000,
       "img": "https://response.jp/imgs/thumb_h2/1237206.jpg"
-    },
-    {
-      "brand": "Kawasaki",
-      "model": "KLX 150",
-      "harga": "25000000",
-      "desc": "Motor trail",
-      "img": "https://bali.need.rent/image/cache/catalog/Kawasaki%20KLX150-500x500.jpg",
-      "id": 4
-    },
-    {
-      "id": 5,
-      "model": "W175",
-      "brand": "Kawasaki",
-      "desc": "Motor Kawasaki W175",
-      "harga": 40000000,
-      "img": "https://ik.imagekit.io/hj8sm3kk7/large/gallery/exterior/88/1274/kawasaki-w-175-right-side-viewfull-image-390020.jpg"
-    },
-    {
-      "id": 6,
-      "model": "PCX",
-      "brand": "Honda",
-      "desc": "Honda PCX",
-      "harga": 36000000,
-      "img": "https://hondaph.com/wp-content/uploads/2018/05/NEW-PCX150-Thumbnail-450px-x-420px.png"
-    },
-    {
-      "id": 7,
-      "model": "XMAX",
-      "brand": "Yamaha",
-      "desc": "Yamaha XMAX",
-      "harga": 36000000,
-      "img": "https://response.jp/imgs/thumb_h2/1237206.jpg"
-    },
-    {
-      "brand": "Kawasaki",
-      "model": "KLX 150",
-      "harga": "25000000",
-      "desc": "Motor trail",
-      "img": "https://bali.need.rent/image/cache/catalog/Kawasaki%20KLX150-500x500.jpg",
-      "id": 8
     }
   ]
 }
