@@ -34,7 +34,7 @@ class HeaderReact extends Component {
 
     onLogoutSelect = () => {
         this.props.onUserLogout();
-        cookies.remove('UserData');
+        cookies.remove('UserData', 'UserEmail');
     }
 
     render() {
@@ -63,8 +63,9 @@ class HeaderReact extends Component {
             )
 
         } else {
-
+            const usernameCookie = cookies.get('UserData'); //======> NGAMBIL COOKIE USERNAME
             return (
+                
                 <div style={{ margin: '0 0 70px 0' }}>
                     <Navbar color="light" light expand="md" fixed="top">
                     <NavbarBrand href="/">{this.props.NavBrand}</NavbarBrand>
@@ -73,16 +74,16 @@ class HeaderReact extends Component {
                         <Nav className="ml-auto" navbar>
 
                         <NavItem>
-                        <NavLink>Hello, {this.props.username}</NavLink>
+                        <NavLink>Hello, {usernameCookie}</NavLink>
                         </NavItem>
                         <NavItem>
                         <Link to="/table"><NavLink>Table</NavLink></Link>
                         </NavItem>
                         <NavItem>
-                        <Link to="/produk"><NavLink>Produk</NavLink></Link>
+                        <NavLink href="/produk">Product Cards</NavLink>
                         </NavItem>
                         <NavItem>
-                        <Link to="/manageproduk"><NavLink>Manage Produk</NavLink></Link>
+                        <Link to="/manageproduk"><NavLink>Product List</NavLink></Link>
                         </NavItem>
                         <NavItem>
                         <Link to="#"><NavLink onClick={this.onLogoutSelect}>Logout</NavLink></Link>

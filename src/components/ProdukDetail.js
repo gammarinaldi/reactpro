@@ -1,32 +1,41 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
+import { select_produk } from '../actions';
+import queryString from 'query-string';
 
 class ProdukDetail extends Component {
+
+    componentDidMount() {
+        //var produkId = this.props.match.params.id;
+        var params = queryString.parse(this.props.location.search);
+        console.log(params);
+        var produkId = params.id;
+        axios.get('http://localhost:1988/produk/' + produkId)
+                .then((res) => {
+                    this.props.select_produk(res.data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+    }
+
     render() {
-        var { brand, model, desc, harga, img} = this.props.produk;
-        return(
-            <div className="container-fluid">
-                <div className="row">
-                    <div className="col-4">
-                        <img src={img} className="img-responsive" alt={img} />
-                    </div>
-                    <div className="col-8">
-                        <div className="row">
-                            <h1>{brand}</h1>
-                        </div>
-                    </div>
-                    <div className="row">
+        if(this.props.username !== "") {
+            var { brand, model, desc, harga, img} = this.props.produk;
+            return(
+                    <div>
+                        <img src={img} alt={img} />
+                        <br/><br/>
+                        <h1>{brand}</h1>
                         <h3>{model}</h3>
-                    </div>
-                    <div className="row">
+                        <br/><br/>
                         <h2>Rp. {harga}</h2>
-                    </div>
-                    <div className="row">
+                        <br/><br/>
                         <p>{desc}</p>
                     </div>
-                </div>
-            </div>
-        )
+            )
+        }
     }
 }
 
@@ -34,4 +43,4 @@ const mapStateToProps = (state) => {
     return { produk: state.selectedProduk }
 }
 
-export default connect(mapStateToProps)(ProdukDetail);
+export default connect(mapStateToProps, { select_produk })(ProdukDetail);

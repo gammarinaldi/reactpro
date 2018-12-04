@@ -18,12 +18,13 @@ class LoginReact extends Component {
       this.props.onUserLogin({username, password}); //===========> PANGGIL ACTION CREATOR
     }
 
-     componentWillReceiveProps(newProps) {
-       if(newProps.username !== '') {
-        cookies.set('UserData', newProps.username, { path: '/' });
-        console.log('Cookies sudah ada');
-       }
-     }
+    componentWillReceiveProps(newProps) {
+      if(newProps.username !== '') {
+      cookies.set('UserData', newProps.username, { path: '/' });
+      cookies.set('UserEmail', newProps.email, { path: '/' });
+      console.log('Cookies sudah ada');
+      }
+    }
 
     render() {
 
@@ -39,7 +40,7 @@ class LoginReact extends Component {
 
         var load;
         if(this.props.loading) {
-            load = <FontAwesomeIcon icon={faSpinner} size="lg" />;
+            load = <center><FontAwesomeIcon icon={faSpinner} size="lg" /></center>;
 
         } else {
             load = <center><Button color="primary" 
@@ -85,7 +86,12 @@ class LoginReact extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return { username: state.auth.username, error: state.auth.error };
+    return { 
+      username: state.auth.username, 
+      email: state.auth.email, 
+      error: state.auth.error,
+      loading: state.auth.loading
+     };
 }
     
 export default connect(mapStateToProps, { onUserLogin })(LoginReact);

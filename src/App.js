@@ -23,7 +23,7 @@ class App extends Component {
     if(newCookie) {
         this.props.keepLogin(newCookie);
     } else {
-      this.props.cookieChecked();
+        this.props.cookieChecked();
     }
   }
 

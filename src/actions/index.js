@@ -101,6 +101,20 @@ export const select_produk = (selectedProduk) => {
 
 export const keepLogin = (username) => {
     return { type: USER_LOGIN_SUCCESS, payload: username }
+    // return (dispatch) => {
+    //     axios.get('http://localhost:1997/users', {
+    //         params: {
+    //             username
+    //         }
+    //     }).then((res) => {
+    //         if(res.data.length > 0) {
+    //             dispatch({
+    //                 type: USER_LOGIN_SUCCESS,
+    //                 payload: { email: res.data[0].email, username }
+    //             })
+    //         }
+    //     })
+    // }
 }
 
 export const cookieChecked = () => {

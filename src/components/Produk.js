@@ -17,16 +17,16 @@ class Produk extends Component {
     }
 
     onBtnSearchClick = () => {
-        var nama = this.refs.searchNama.value;
-        var merk = this.refs.searchMerk.value;
+        var brand = this.refs.searchBrand.value;
+        var model = this.refs.searchModel.value;
         var hargaMin = parseInt(this.refs.hargaMinSearch.value);
         var hargaMax = parseInt(this.refs.hargaMaxSearch.value);
 
         var arrSearch = this.state.listProduk.filter((item) => {
-            return item.brand.includes(merk) 
+            return item.brand.includes(brand)
                     && item.harga >= hargaMin
                     && item.harga <= hargaMax
-                    && item.model.toLowerCase().includes(nama.toLowerCase())
+                    && item.model.toLowerCase().includes(model.toLowerCase())
         })
 
         this.setState({ searchListProduk: arrSearch })
@@ -60,34 +60,51 @@ class Produk extends Component {
     render() {
         if(this.props.username !== "") {
             if(this.props.produk.id !== 0) {
-                return <Redirect to="/produkdetail" />
+                return <Redirect to={`/produkdetail?id=${this.props.produk.id}&brand=${this.props.produk.brand}`} />
             }
             return (
                 <div>
                     <section className="bg-light" id="portfolio">
                         <div className="container-fluid">
                             <div className="row">
-                            <div className="col-lg-12 text-center">
-                                <h2 className="section-heading text-uppercase">List Produk</h2>
-                                <h3 className="section-subheading text-muted">Best produk in town.</h3>
-                            </div>
-                            </div>
-                            <div className="row">
-                                <div className="col-4">
-                                    <form>
-                                        <input type="text" className="form-input" ref="searchNama" placeholder="Nama Popok" />
-                                        <select ref="searchMerk">
-                                            <option value="">All Merk</option>
-                                            <option>Kawasaki</option>
-                                            <option>Honda</option>
-                                            <option>Yamaha</option>
-                                        </select>
-                                        Harga : <input type="number" ref="hargaMinSearch" defaultValue="0" /> - <input type="number" ref="hargaMaxSearch" defaultValue="9999999" />
-                                        <input type="button" className="btn btn-success" 
-                                        value="Search" onClick={this.onBtnSearchClick} />
-                                    </form>
+                                <div className="col-lg-12 text-center">
+                                    <h2 className="section-heading text-uppercase">List Produk Otomotif</h2>
+                                    <h3 className="section-subheading text-muted">Best produk in town.</h3>
                                 </div>
                             </div>
+
+                            <form class="form-inline">
+                                <input type="text" className="form-control" ref="searchModel" 
+                                placeholder="Cari Model Kendaraan" style={{ margin: '0 20px 0 0' }}/>
+                                
+                                <select ref="searchBrand" className="custom-select" style={{ margin: '0 20px 0 0' }}>
+                                    <option value="">---Semua Brand---</option>
+                                    <option>Kawasaki</option>
+                                    <option>Honda</option>
+                                    <option>Yamaha</option>
+                                </select>
+                                
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">Min</div>
+                                    </div>
+                                    <input type="number" className="form-control" 
+                                    ref="hargaMinSearch" defaultValue="0" style={{ margin: '0 20px 0 0' }}/>
+                                </div>
+                                
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">Max</div>
+                                    </div>
+                                    <input type="number" className="form-control" 
+                                    ref="hargaMaxSearch" defaultValue="999999999" style={{ margin: '0 20px 0 0' }}/>
+                                </div>
+                                
+                                <input type="button" className="btn btn-success" 
+                                value="Search" onClick={this.onBtnSearchClick} />  
+                            </form>
+
+                            <br/><br/>
                             <div className="row">
                                    {this.renderListProduk()}
                             </div>
