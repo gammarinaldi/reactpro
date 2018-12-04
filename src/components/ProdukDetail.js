@@ -24,7 +24,7 @@ class ProdukDetail extends Component {
         if(this.props.username !== "") {
             var { brand, model, desc, harga, img} = this.props.produk;
             return(
-                    <div>
+                    <div className="container">
                         <img src={img} alt={img} />
                         <br/><br/>
                         <h1>{brand}</h1>
