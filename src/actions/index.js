@@ -4,6 +4,8 @@ import {
     USER_LOGIN_SUCCESS,
     AUTH_LOADING,
     AUTH_SYSTEM_ERROR,
+    AUTH_REGISTER_ERROR,
+    AUTH_LOGIN_ERROR,
     LOGOUT,
     USER_REGISTER_SUCCESS,
     COOKIE_CHECKED,
@@ -17,7 +19,7 @@ export const onUserRegister = ({ username, email, phone, password }) => {
         dispatch({ type: AUTH_LOADING });
 
         if(username === '' || email === '' || phone === '' || password === '') {
-            dispatch({ type: AUTH_SYSTEM_ERROR, payload: 'Semua form wajib diisi' });
+            dispatch({ type: AUTH_REGISTER_ERROR, payload: 'Semua form wajib diisi' });
         } else {
             axios.get('http://localhost:1988/users', {
                 params: {
@@ -45,7 +47,7 @@ export const onUserRegister = ({ username, email, phone, password }) => {
                     //================END >> POST DATA TO JSON SERVER=================//
 
                 } else {
-                    dispatch( {type: AUTH_SYSTEM_ERROR, payload: 'Username sudah ada.'} );
+                    dispatch( {type: AUTH_REGISTER_ERROR, payload: 'Username sudah ada.'} );
                 }
 
             }).catch((err) => {
@@ -80,7 +82,7 @@ export const onUserLogin = ({ username, password}) => {
                 dispatch({ type: USER_LOGIN_SUCCESS, 
                             payload: { username, email: res.data[0].email } });
             } else {
-                dispatch({ type: AUTH_SYSTEM_ERROR, payload: 'Username or password invalid.' });
+                dispatch({ type: AUTH_LOGIN_ERROR, payload: 'Username or password invalid.' });
             }
         })
         .catch((err) => {

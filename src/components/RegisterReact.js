@@ -27,24 +27,23 @@ class RegisterReact extends Component {
     }
 
     render () {
-        console.log('error register: ' + this.props.error);
         if(this.props.username === "") {
 
             var load;
             if(this.props.loading) {
                 load = <center><FontAwesomeIcon icon={faSpinner} size="lg" /></center>;
-                //load ='Loading...';
-                //load = <Delay wait={250}><div><FontAwesomeIcon icon={faSpinner} size="lg" /></div></Delay>
-
             } else {
                 load = <center><Button color="primary" 
-                onClick={this.onBtnRegisterClick}>Register</Button></center>;
+                        onClick={this.onBtnRegisterClick}>Register</Button></center>;
             }
 
-            if(this.props.error) {
-                var alert = <p align='left' style={{ fontSize: '13px' }} 
-                className="alert alert-danger"><FontAwesomeIcon icon={faExclamationTriangle} size="md" />
-                 &nbsp;{this.props.error}</p>;
+            var alertRegister = this.props.errorRegister;
+
+            if(alertRegister) {
+                var alertReg = <p align='left' style={{ fontSize: '13px' }} 
+                                    className="alert alert-danger">
+                                    <FontAwesomeIcon icon={faExclamationTriangle} size="md" />
+                                    &nbsp;{this.props.errorRegister}</p>;
               }
 
             return (
@@ -99,7 +98,7 @@ class RegisterReact extends Component {
                             <div className="form-group">
                                 {load}
                                 <br/>
-                                {alert}
+                                {alertReg}
                             </div>    
                             <p className="text-center">Have an account? &nbsp;
                             <Link to="/login">Login</Link> </p>                                                                 
@@ -122,10 +121,9 @@ class RegisterReact extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return { username: state.auth.username, 
-             type: state.auth.error, 
+    return { username: state.auth.username,
              loading: state.auth.loading, 
-             error: state.auth.error 
+             errorRegister: state.auth.errorRegister 
             };
 }
     

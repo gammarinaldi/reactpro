@@ -55,12 +55,12 @@
   ],
   "produk": [
     {
-      "id": 1,
-      "model": "W175",
       "brand": "Kawasaki",
+      "model": "W175",
+      "harga": "40000000",
       "desc": "Motor Kawasaki W175",
-      "harga": 40000000,
-      "img": "https://ik.imagekit.io/hj8sm3kk7/large/gallery/exterior/88/1274/kawasaki-w-175-right-side-viewfull-image-390020.jpg"
+      "img": "https://ik.imagekit.io/hj8sm3kk7/large/gallery/exterior/88/1274/kawasaki-w-175-right-side-viewfull-image-390020.jpg",
+      "id": 1
     },
     {
       "id": 2,
@@ -77,6 +77,14 @@
       "desc": "Yamaha XMAX",
       "harga": 36000000,
       "img": "https://response.jp/imgs/thumb_h2/1237206.jpg"
+    },
+    {
+      "brand": "Suzuki",
+      "model": "All New Satria F 150",
+      "harga": "22000000",
+      "desc": "Motor obat gantengnya kuproy",
+      "img": "https://www.suzuki.co.id/uploads/motorcycle/Satria-main.jpg",
+      "id": 4
     }
   ]
 }

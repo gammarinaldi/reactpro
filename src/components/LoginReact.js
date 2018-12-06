@@ -30,12 +30,12 @@ class LoginReact extends Component {
 
       if(this.props.username === "") {
 
-        var alert;
-        
-        if(this.props.error) {
-          alert = <p align='left' style={{ fontSize: '13px' }} 
-          className="alert alert-danger"><FontAwesomeIcon icon={faExclamationTriangle} size="md" />
-           &nbsp;{this.props.error}</p>;
+        var alertLogin = this.props.errorLogin;
+        if(alertLogin) {
+          var alertLog = <p align='left' style={{ fontSize: '13px' }} 
+                        className="alert alert-danger">
+                        <FontAwesomeIcon icon={faExclamationTriangle} size="md" />
+                        &nbsp;{this.props.errorLogin}</p>;
         }
 
         var load;
@@ -43,8 +43,7 @@ class LoginReact extends Component {
             load = <center><FontAwesomeIcon icon={faSpinner} size="lg" /></center>;
 
         } else {
-            load = <center><Button color="primary" 
-            onClick={this.onBtnSubmit}>Sign In</Button></center>;
+            load = <center><Button color="primary" onClick={this.onBtnSubmit}>Sign In</Button></center>;
         }
 
         return (
@@ -70,7 +69,7 @@ class LoginReact extends Component {
                 <input ref="password" className="form-control" placeholder="Input password" type="password" />
               </div>
               </FormGroup>
-              {alert}
+              {alertLog}
               {load}
             </Form>
             <br/>
@@ -85,11 +84,11 @@ class LoginReact extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state) => { //===========> NGAMBIL DATA KE GLOBAL STATE
     return { 
       username: state.auth.username, 
       email: state.auth.email, 
-      error: state.auth.error,
+      errorLogin: state.auth.errorLogin,
       loading: state.auth.loading
      };
 }

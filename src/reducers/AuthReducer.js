@@ -1,6 +1,8 @@
 import { 
     USER_LOGIN_SUCCESS,
     AUTH_SYSTEM_ERROR, 
+    AUTH_LOGIN_ERROR,
+    AUTH_REGISTER_ERROR,
     AUTH_LOADING, 
     LOGOUT,
     USER_REGISTER_SUCCESS,
@@ -8,7 +10,15 @@ import {
 } from '../actions/types';
 
 //=================GLOBAL STATE IS HERE====================//
-const INITIAL_STATE = { username: '', email: '', error: '', loading: false, cookie: false };
+const INITIAL_STATE = { 
+                        username: '', 
+                        email: '', 
+                        errorSystem: '', 
+                        errorRegister: '',
+                        errorLogin: '',
+                        loading: false, 
+                        cookie: false 
+                    };
 
 export default (state = INITIAL_STATE, action) => {
     switch(action.type) {
@@ -19,7 +29,13 @@ export default (state = INITIAL_STATE, action) => {
                     email: action.payload.email, cookie: true };
 
         case AUTH_SYSTEM_ERROR:
-            return { ...INITIAL_STATE, error: action.payload, cookie: true };
+            return { ...INITIAL_STATE, errorSystem: action.payload, cookie: true };
+
+        case AUTH_REGISTER_ERROR:
+                return { ...INITIAL_STATE, errorRegister: action.payload, cookie: true };
+
+        case AUTH_LOGIN_ERROR:
+                return { ...INITIAL_STATE, errorLogin: action.payload, cookie: true };
 
         case LOGOUT:
             return { ...INITIAL_STATE, cookie: true };

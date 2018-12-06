@@ -35,7 +35,7 @@ class ManageProduk extends Component {
             brand, model, harga, desc, img
         }).then((res) => {
             console.log(res);
-            this.getProduk();
+            this.showProduk();
         }).catch((err) => {
             console.log(err);
         })
@@ -52,7 +52,7 @@ class ManageProduk extends Component {
             brand, model, harga, desc, img
         }).then((res) => {
             console.log(res);
-            this.getProduk();
+            this.showProduk();
         }).catch((err) => {
             console.log(err);
         })
@@ -63,12 +63,12 @@ class ManageProduk extends Component {
             axios.delete('http://localhost:1988/produk/' + id)
                 .then((res) => {
                     console.log(res);
-                    this.getProduk();
+                    this.showProduk();
                 })
                 .catch((err) => {
                     console.log(err);
                 })
-            }
+        }
     }
 
     convertToRupiah = (angka) => {
@@ -79,17 +79,36 @@ class ManageProduk extends Component {
     }
 
     formSearch = () => {
-        var filtered = this.refs.query.value;
-        this.setState({ filterForm: filtered });
+        this.setState({ filterForm: this.refs.query.value });
     }
 
     filterProduk = () => {
-        var listFilteredProduk = this.state.listProduk.filter((item) => {
+        var filterList;
+
+        filterList = this.state.listProduk.filter((item) => {
             return (
-                item.brand.includes(this.state.filterForm)
+                item.brand.toLowerCase().includes(this.state.filterForm.toLowerCase())
             )
         })
-        return listFilteredProduk;
+        console.log(filterList)
+
+        if(filterList.length === 0) {
+            filterList = this.state.listProduk.filter((item) => {
+                return (
+                    item.model.toLowerCase().includes(this.state.filterForm.toLowerCase())
+                )
+            })
+        }
+
+        if(filterList.length === 0) {
+            filterList = this.state.listProduk.filter((item) => {
+                return (
+                    item.desc.toLowerCase().includes(this.state.filterForm.toLowerCase())
+                )
+            })
+        }
+
+        return filterList;
     }
   
     renderListProduk = () => {
