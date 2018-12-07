@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 import { Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { sendCurrentPage } from '../actions';
 
 const theCookies = new Cookies();
 
-class TableList extends Component {
+class tableList extends Component {
 
     state = { listTerapis: [] }
 
@@ -46,13 +44,9 @@ class TableList extends Component {
     render() {
       const thisCookie = theCookies.get('UserData'); //======> NGAMBIL DATA COOKIES
       if(thisCookie) {
-        this.props.sendCurrentPage({
-          username: this.props.username, 
-          path: this.props.location.pathname
-        }); //===========> KIRIM CURRENT PAGE KE ACTION CREATOR
         return (
           <div>
-              <h3>List Terapis: </h3>
+              <h3>Table List: </h3>
               <table className="table">
               <thead className="thead-dark">
                 <tr>
@@ -84,8 +78,4 @@ class TableList extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-  return { username: state.auth.username }
-}
-
-export default connect(mapStateToProps, {sendCurrentPage})(TableList);
+export default tableList;

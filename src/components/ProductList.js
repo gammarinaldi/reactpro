@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { InputGroup, Row, Col } from 'reactstrap';
+import { InputGroup, Row, Col } from 'reactstrap'; 
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { sendCurrentPage } from '../actions';
 
-class ManageProduk extends Component {
+class ProductList extends Component {
 
     state = { listProduk: [], selectedIdEdit: 0, filterForm: '' }
 
@@ -172,15 +171,10 @@ class ManageProduk extends Component {
 
         
     render() {
-        
-        if(this.props.username !== "") {
-            this.props.sendCurrentPage({
-                username: this.props.username, 
-                path: this.props.location.pathname
-            }); //===========> KIRIM CURRENT PAGE KE ACTION CREATOR
+        if(this.props.username !== "") { 
             return(
                 <div>
-                    <h1>Manage Produk</h1>
+                    <h1>Product in List</h1>
                     <br/>
                     <Row>
                         <Col sm="12" md={{ size: 6, offset: 3 }}>
@@ -244,7 +238,9 @@ class ManageProduk extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return { username: state.auth.username }
+    return { 
+                username: state.auth.username
+            }
 }
 
-export default connect(mapStateToProps, {sendCurrentPage})(ManageProduk);
+export default connect(mapStateToProps)(ProductList);

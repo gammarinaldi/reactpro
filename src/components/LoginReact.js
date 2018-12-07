@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import Cookies from 'universal-cookie';
+import { sendCurrentPage } from '../actions';
 
 const cookies = new Cookies();
 
@@ -29,6 +30,11 @@ class LoginReact extends Component {
     render() {
 
       if(this.props.username === "") {
+        
+        // this.props.sendCurrentPage({
+        //     username: this.props.username, 
+        //     path: this.props.location.pathname
+        // }); //===========> KIRIM CURRENT PAGE KE ACTION CREATOR
 
         var alertLogin = this.props.errorLogin;
         if(alertLogin) {
@@ -49,31 +55,33 @@ class LoginReact extends Component {
         return (
           <div>
             <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" />
-            <div className="card bg-light">
-            <br/>
-              <Form className="col-3" style={{ margin: '0 auto' }}>
-              <h5 style={{ textAlign: 'center' }}>LOGIN</h5><br/>
-              <FormGroup>
-              <div className="form-group input-group">
-                <div className="input-group-prepend">
-                <span className="input-group-text"> <i className="fa fa-user" /> </span>
+            
+              <div className="card bg-light">
+              <br/>
+                <Form className="col-3" style={{ margin: '0 auto' }}>
+                <h5 style={{ textAlign: 'center' }}>LOGIN</h5><br/>
+                <FormGroup>
+                <div className="form-group input-group">
+                  <div className="input-group-prepend">
+                  <span className="input-group-text"> <i className="fa fa-user" /> </span>
+                  </div>
+                  <input ref="username" className="form-control" placeholder="Input username" type="text" />
                 </div>
-                <input ref="username" className="form-control" placeholder="Input username" type="text" />
-              </div>
-              </FormGroup>
-              <FormGroup>
-              <div className="form-group input-group">
-                <div className="input-group-prepend">
-                <span className="input-group-text"> <i className="fa fa-lock" /> </span>
+                </FormGroup>
+                <FormGroup>
+                <div className="form-group input-group">
+                  <div className="input-group-prepend">
+                  <span className="input-group-text"> <i className="fa fa-lock" /> </span>
+                  </div>
+                  <input ref="password" className="form-control" placeholder="Input password" type="password" />
                 </div>
-                <input ref="password" className="form-control" placeholder="Input password" type="password" />
-              </div>
-              </FormGroup>
-              {alertLog}
-              {load}
-            </Form>
-            <br/>
-          </div>
+                </FormGroup>
+                {alertLog}
+                {load}
+              </Form>
+              <br/>
+            </div>
+          
         </div>
         )
 
@@ -93,4 +101,4 @@ const mapStateToProps = (state) => { //===========> NGAMBIL DATA KE GLOBAL STATE
      };
 }
     
-export default connect(mapStateToProps, { onUserLogin })(LoginReact);
+export default connect(mapStateToProps, { onUserLogin, sendCurrentPage })(LoginReact);

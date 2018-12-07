@@ -7,3 +7,4 @@ export const LOGOUT = 'Logout';
 export const USER_REGISTER_SUCCESS = 'Register success';
 export const COOKIE_CHECKED = 'Cookie checked.';
 export const SELECT_PRODUK = 'Select produk';
+export const CURRENT_PAGE = 'Current page';

@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 import ItemList from './ItemList';
 import { sendCurrentPage } from '../actions';
 
-class Produk extends Component {
+class ProductCards extends Component {
     state = { listProduk: [], searchListProduk: [] }
 
     componentDidMount() {
@@ -15,6 +15,8 @@ class Produk extends Component {
             }).catch((err) => {
                 console.log(err)
             })
+            
+        this.props.sendCurrentPage(this.props.location.pathname); //===========> KIRIM CURRENT PAGE KE ACTION CREATOR
     }
 
     onBtnSearchClick = () => {
@@ -59,14 +61,9 @@ class Produk extends Component {
     }
 
     render() {
-        
         if(this.props.username !== "") {
-            this.props.sendCurrentPage({
-                username: this.props.username, 
-                path: this.props.location.pathname
-            }); //===========> KIRIM CURRENT PAGE KE ACTION CREATOR
             if(this.props.produk.id !== 0) {
-                return <Redirect to={`/produkdetail?id=${this.props.produk.id}&brand=${this.props.produk.brand}`} />
+                return <Redirect to={`/productdetails?id=${this.props.produk.id}&brand=${this.props.produk.brand}`} />
             }
             return (
                 <div>
@@ -74,12 +71,12 @@ class Produk extends Component {
                         <div className="container-fluid">
                             <div className="row">
                                 <div className="col-lg-12 text-center">
-                                    <h2 className="section-heading text-uppercase">List Produk Otomotif</h2>
+                                    <h2 className="section-heading text-uppercase">Products in Cards</h2>
                                     <h3 className="section-subheading text-muted">Best produk in town.</h3>
                                 </div>
                             </div>
 
-                            <form class="form-inline">
+                            <form className="form-inline">
                                 <input type="text" className="form-control" ref="searchModel" 
                                 placeholder="Cari Model Kendaraan" style={{ margin: '0 20px 0 0' }}/>
                                 
@@ -90,17 +87,17 @@ class Produk extends Component {
                                     <option>Yamaha</option>
                                 </select>
                                 
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">Min</div>
+                                <div className="input-group">
+                                    <div className="input-group-prepend">
+                                        <div className="input-group-text">Min</div>
                                     </div>
                                     <input type="number" className="form-control" 
                                     ref="hargaMinSearch" defaultValue="0" style={{ margin: '0 20px 0 0' }}/>
                                 </div>
                                 
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">Max</div>
+                                <div className="input-group">
+                                    <div className="input-group-prepend">
+                                        <div className="input-group-text">Max</div>
                                     </div>
                                     <input type="number" className="form-control" 
                                     ref="hargaMaxSearch" defaultValue="999999999" style={{ margin: '0 20px 0 0' }}/>
@@ -125,7 +122,10 @@ class Produk extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return { username: state.auth.username, produk: state.selectedProduk }
+    return { 
+                username: state.auth.username,
+                produk: state.selectedProduk
+            }
 }
 
-export default connect(mapStateToProps, {sendCurrentPage})(Produk);
+export default connect(mapStateToProps, {sendCurrentPage})(ProductCards);

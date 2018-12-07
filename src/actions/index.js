@@ -9,7 +9,8 @@ import {
     LOGOUT,
     USER_REGISTER_SUCCESS,
     COOKIE_CHECKED,
-    SELECT_PRODUK
+    SELECT_PRODUK,
+    CURRENT_PAGE
 } from './types';
 
 export const onUserRegister = ({ username, email, phone, password }) => {
@@ -102,23 +103,33 @@ export const select_produk = (selectedProduk) => {
 }
 
 export const keepLogin = (username) => {
-    return { type: USER_LOGIN_SUCCESS, payload: username }
-    // return (dispatch) => {
-    //     axios.get('http://localhost:1997/users', {
-    //         params: {
-    //             username
-    //         }
-    //     }).then((res) => {
-    //         if(res.data.length > 0) {
-    //             dispatch({
-    //                 type: USER_LOGIN_SUCCESS,
-    //                 payload: { email: res.data[0].email, username }
-    //             })
-    //         }
-    //     })
-    // }
+    //return { type: USER_LOGIN_SUCCESS, payload: username }
+    return (dispatch) => {
+        axios.get('http://localhost:1988/users', {
+            params: {
+                username
+            }
+        }).then((res) => {
+            if(res.data.length > 0) {
+                dispatch({
+                    type: USER_LOGIN_SUCCESS,
+                    payload: { email: res.data[0].email, username }
+                })
+            }
+        })
+    }
 }
 
 export const cookieChecked = () => {
     return { type: COOKIE_CHECKED }
+}
+
+export const sendCurrentPage = ({username, path}) => {
+    return { 
+        type: CURRENT_PAGE, 
+        payload: { 
+            username: username,
+            path: path
+        }
+    }
 }

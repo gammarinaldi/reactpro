@@ -10,7 +10,7 @@ import {
     } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { onUserLogout, keepLogin } from '../actions';
+import { onUserLogout } from '../actions';
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
@@ -38,7 +38,7 @@ class HeaderReact extends Component {
     }
 
     render() {
-        console.log(this.props.username);
+        console.log('Username header: ' + this.props.username);
         if(this.props.username === "") {
 
             return (
@@ -105,4 +105,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {onUserLogout, keepLogin})(HeaderReact);
+export default connect(mapStateToProps, {onUserLogout})(HeaderReact);
