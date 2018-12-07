@@ -1,0 +1,1 @@
+npm install @fortawesome/fontawesome-free @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/react-fontawesome axios bootstrap jquery react-redux react-router-dom reactstrap redux redux-thunk universal-cookie query-string
